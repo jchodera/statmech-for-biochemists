@@ -5,7 +5,7 @@
 %
 % First, provide some data about this document
 \ccode{WCGMS BCMB} % Most of these data are not compulsory
-\title{Biochemistry Fall 2019}
+\title{Biochemistry Fall 2021}
 \subtitle{Statistical mechanics and thermodynamics relevant to drug discovery}
 \shorttitle{Stat mech} % For headers; if undefined, the usual title will be used
 \subject{Subject of the Talk}
@@ -13,8 +13,8 @@
 \email{john.chodera@choderalab.org}
 %\spemail{john.chodera@choderalab.org}
 %\speaker{Speaker's name}
-\date{31}{08}{2018}
-\dateend{05}{09}{2018}
+\date{13}{09}{2021}
+\dateend{15}{09}{2021}
 %\conference{RRL-103 / BB-204A}
 %\place{Tri-I}
 %\flag{An extra line if you need it.}
@@ -73,16 +73,17 @@ A useful resource for those who wish to delve more into the mathematics behind t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{What is statistical mechanics and why is it useful?}
-\lecture[BB302D]{4}{09}{2019}
+\lecture[Read prior to lecture]{13}{09}{2021}
 
 The bad news is that it's impossible to learn all of statistical mechanics in two lectures.
 The good news is that you don't have to.
-A great deal of statistical mechanics and thermodynamics comes from some very simple ideas, and everything can be derived (with a bit of work) from a few simple principles---after that, everything you might want to do with it requires some hard work with computer simulations or fancy algorithms to get the answers you want, and even then, the quality of your results will be highly dependent on the accuracy of the model you use.
+A great deal of statistical mechanics and thermodynamics comes from some very simple ideas, and everything can be derived (with a bit of straightforward mathematics) from a few simple principles.
+While we focus on a few simple analytically soluble illustrative examples that can help build intuition, pretty much everything useful you might want to do with statistical mechanics requires some hard work with computer simulations or fancy algorithms to address questions in a quantitatively satisfying way, and even then, the quality of your results will be highly dependent on the accuracy of the model you use to represent physical systems.
 
 In these two lectures, we'll focus on two goals:
 \begin{itemize}
-\item In the {\bf first lecture}, we'll try to arm you with the fundamental ideas you will need to see if an idea is even remotely consistent with what we know about how all systems \emph{must} behave at the microscopic and macroscopic levels. We want to equip you with the tools to quickly weed out or identify Bad Ideas (TM) and hopefully, even some tools that help you create some simple useful models that help you understand systems at the microscopic level to explain the weird thing you're seeing in your experiments.
-\item In the {\bf second lecture}, we want to give you the idea for how systems behave at the microscopic level that is relevant to biological macromolecules that carry out biological processes---where \emph{real} biology happens. It's \emph{very} different than our everyday experience in the macroscopic world. As a result, most of the movies that you've seen of how microscopic processes might work at the single-molecule level are just \emph{wrong}---complexes moving together to associate with seemingly deterministic intent to associate, motor proteins chugging along at constant velocity, ribosomes happily translating away without ever stuttering, ATP synthases happily generating ATP without ever going backwards and hydrolyzing ATP---all of this is \emph{wrong}. Action at the microscopic level is not just corrupted by statistical motion---wiggling and jiggling---it is \emph{dominated} by it. Consider a pool table: At the macroscopic scale, when you hit a ball with the cue ball, the balls beautifully follow Newton's laws, reflecting off the bumpers in highly predictable ways; at the microscopic scale, a pool table the size of the ribosome would see the pool balls all go in and out of all the pockets \emph{all on their own}, and if you hit a ball with the cue ball, it wouldn't get very far before its trajectory would completely deviate from where you had intended to hit it. It's just \emph{different}. We'll try to give you a sense of this stochasticity in the second lecture.
+\item In the {\bf first lecture}, we'll try to arm you with the fundamental ideas you will need to see if an idea is even remotely consistent with what we know about how physical systems \emph{must} behave at the microscopic and macroscopic levels. We want to equip you with the tools to quickly weed out or identify Bad Ideas (TM) and hopefully, even some tools that help you create some simple useful models that help you understand systems at the microscopic level to explain the weird thing you're seeing in your experiments.
+\item In the {\bf second lecture}, we want to give you the idea for how systems behave at the microscopic level that is relevant to biological macromolecules that carry out biological processes---where \emph{real} biology happens. It's \emph{very} different than our everyday experience in the macroscopic world. As a result, most of the movies that you've seen of how microscopic processes might work at the single-molecule level are just \emph{wrong}---complexes moving together to associate with seemingly deterministic intent to associate, motor proteins chugging along at constant velocity, ribosomes happily translating away without ever stuttering, ATP synthases happily generating ATP without ever going backwards and hydrolyzing ATP---all of this is \emph{wrong} in a way that can lead to intuitively satisfying but highly unpredictive mental models. Action at the microscopic level is not just corrupted by statistical motion---wiggling and jiggling---it is \emph{dominated} by it. Consider a pool table: At the macroscopic scale, when you hit a ball with the cue ball, the balls beautifully follow Newton's laws, reflecting off the bumpers in highly predictable ways; at the microscopic scale, a pool table the size of the ribosome would see the pool balls all go in and out of all the pockets \emph{all on their own}, and if you hit a ball with the cue ball, it wouldn't get very far before its trajectory would completely deviate from where you had intended to hit it. It's just \emph{different}, and accounting for these differences is critical to building models that are \emph{predictive}---the essence of science. We'll try to give you a sense of this stochasticity in the second lecture.
 \end{itemize}
 
 \vfill
@@ -90,7 +91,7 @@ In these two lectures, we'll focus on two goals:
 
 \subsection{Statistical mechanics}
 
-Consider a single particle moving in a vacuum, potentially in some fixed field of other particles.
+Consider a single particle moving in a vacuum, or in something pretty close to a vacuum that contains very few other particles:
 
 \begin{centering}
 \includegraphics[width=0.4\textwidth]{figures/single-particle.jpg}
@@ -98,7 +99,7 @@ Consider a single particle moving in a vacuum, potentially in some fixed field o
 \end{centering}
 
 Maybe it's the earth moving in the gravitational pull of the sun, or an ionized protein moving in an electric field in a mass spectrometer.
-It's easy to describe the motion of the object in these cases as they follow Newton's laws of motion to very good approximation: We can easily predict where the object will be some time $t$ after we initially observe it if we know some basic properties of the system, like masses, velocities, positions, and the quantitative nature of interactions between the objects.
+Over a broad and relevant range of length- and time-scales, it's easy to describe the motion of the object in these cases as they follow Newton's laws of motion to very good approximation: We can easily predict where the object will be some time $t$ after we initially observe it if we know some basic properties of the system, like masses, velocities, positions, and the quantitative nature of interactions between the objects.
 In fact, we can do this so well that we can figure out how to toss a tiny spacecraft between two planets:
 
 \begin{centering}
@@ -121,7 +122,7 @@ Consider this beautiful illustration of the interior of an \emph{E.~coli} by Dav
 \end{centering}
 
 It might seem hopeless to make concrete predictions about the behavior of such a complex system.
-There's so much going on in this system---even if there are many identical copies of the same protein behaving in different ways, interacting with other molecules, jostled around by the solvent, that it's impossible to predict what any particle will do unless we know \emph{everything} about all of the biomolecules and solvent molecules in the system---their velocities, positions, and detailed interactions.
+There's so much going on in this system---even if there are many identical copies of the same protein behaving in different ways, interacting with other molecules, jostled around by the solvent, that it's impossible to predict what any particle will do from Newton's laws unless we know \emph{everything} about all of the biomolecules and solvent molecules in the system---their velocities, positions, and detailed interactions.
 It's almost information overload---even if we \emph{had} all that information and could predict what would happen, what would we do with all of it?
 We need a simpler description of what is going on in this system that is actually \emph{useful} to us.
 That's where statistical mechanics comes in.
@@ -139,7 +140,7 @@ At its core, statistical mechanics is about saying something simple and predicti
 \subsection{Thermodynamics}
 
 Thermodynamics is a dinosaur.
-It is a complex, internally consistent set of relations that describe some properties of the macroscopic world in terms of self-consistently defined quantities that make no reference to the microscopic nature of matter; concepts like entropy are purely convenient constructs that do not make reference to the microscopic disorder of particles.
+It is a complex, internally consistent set of relations that describe some properties of the macroscopic world in terms of self-consistently defined quantities that make no reference to the microscopic nature of matter; concepts like entropy are purely convenient constructs that do not make reference to the microscopic disorder of systems.
 While useful a century ago in the design of efficient steam engines, we find little use for it today beyond a few basic laws that can help act as a bullshit detector: If some proposed mechanism violates the laws of thermodynamics, it's probably incorrect.
 Most results we need in thermodynamics can be derived from statistical mechanics, but we'll review a few useful results from thermodynamics that will help you weed out bad ideas.
 
@@ -167,12 +168,18 @@ We call these \emph{van der Waals} interactions.
 
 \end{centering}
 
+A simple model of van der Waals interactions has been used since the earliest days of minicomputers: the Lennard-Jones 12-6 model, which uses just two parameters---well depth $\epsilon$ and LJ radius $\epsilon$---to describe the potential dependence on the interatomic separation $r$:
+The repulsive wall when two atoms get too close to each other should really be more like an exponential due to Pauli's exclusion principle, but it was easier to square the $r^6$ on early minicomputers to approximate an exponential overlap, so we seem to be stuck with that today in many computer models.
+
 If we want to talk about the system's kinetic motion, the system also has velocities $v \in \Re^{3N}$, and kinetic energy $\mathcal{K}(v)$ defined by
 \begin{equation}
 \mathcal{K}(v) = \frac{1}{2} \sum_{n=1}^N m_n ||v_n||^2
 \end{equation}
 
-The {\bf total energy} $E(x,v) = U(x) + \mathcal{K}(v)$ of an isolated system---one that is not in contact with some other system that allows it to exchange energy---is \emph{constant} $E_0$, and cannot change.
+The {\bf total energy} $E(x,v)$ of an isolated system---one that is not in contact with some other system that allows it to exchange energy---is \emph{constant} $E_0$, and cannot change.
+\begin{equation}
+E(x,v) = U(x) + \mathcal{K}(v) \label{equation:total-energy}
+\end{equation}
 You might sometimes see the total energy written as the Hamiltonian $H(x,v)$---it's identical to the total energy when you're talking about positions $x$ and velocities $v$, but is a more general construct that allows you to talk about systems with other coordinate systems like angles, torsions, etc.
 
 \begin{centering}
@@ -200,7 +207,7 @@ While heat and work are sometimes confusing quantities, they're just convenient 
 \section{Equilibrium probability distributions} 
 
 Much of the time, we're interested in things we can say about the behavior of the system at equilibrium, which is often how we study biomolecules \emph{in vitro}.
-Much of life is decidedly \emph{not} at equilibrium, since the constant consumption of ATP converts chemical energy into work capable of driving chemical and biological processes such as reactions, motor proteins, and transport---often simply by providing a way to \emph{suppress} reversibility and rectify thermal motion to drive things forward.
+Much of life is decidedly \emph{not} at equilibrium, since the constant consumption of ATP converts chemical energy into work capable of driving chemical and biological processes such as reactions, motor proteins, and transport---often simply by providing a way to \emph{suppress} reversibility and rectify thermal motion to drive things in a direction compatible with continued life.
 
 We consider the case where a subsystem of interest---such as the region around a biological macromolecule in the context of part of a test tube or cellular environment.
 We can consider the region we study as a subsystem being in contact with some sort of macroscopic environment held at a fixed absolute temperature $T$ (generally written in Kelvin, and always an \emph{absolute} temperature where $T = 0$ denotes absolute zero---never Celsius or Fahrenheit, which use relative scales where $T = 0$ is not absolute zero!).
@@ -219,13 +226,13 @@ Surprisingly, we can often say a great deal about the system with just a small a
 \subsection{The Boltzmann law} 
 
 The most important law governing the behavior of microscopic systems at equilibrium is the Boltzmann law.
-We'll start with a speciic form of this law for the case of a subsystem with a fixed number $N$ of particles at thermal equilibrium at temperature $T$:
+We'll start with a specific form of this law for the case of a subsystem with a fixed number $N$ of particles at thermal equilibrium at temperature $T$:
 \begin{equation}
 \pi(x,v) \propto e^{-\beta E(x,v)} \label{equation:boltzmann-law}
 \end{equation}
 where $\pi(x,v)$ is the probability of observing the system in a particular configuration $x$ and with an instantaneous velocity $v$, $\beta \equiv (k_B T)^{-1}$ is called the {\bf inverse temperature} and has dimensions of inverse energy, and $k_B \approx 1.381 \times 10^{-23}$~J/K is the Boltzmann constant.
 To make things simple, at room temperature (298~K), thermal energy $k_B T \approx 0.6$~kcal/mol.
-Because the argument of an exponential must be dimensionless, we note that the product of $\beta$ (with dimensions of inverse energy) and $E$ (with dimensions of energy) produces a unitless quantity that we can safely use as an exponent.
+Because the argument of an exponential must be dimensionless, we note that the product of $\beta$ (with dimensions of inverse energy) and $E$ (with dimensions of energy) produces a unitless quantity that we can safely use as an exponent in Eq.~\ref{equation:boltzmann-law}.
 
 Importantly, we've written the probability density $\pi(x,v)$ in terms of positions $x$ and velocities $v$.
 If instead we used a different set of variables---such as internal degrees of freedom (angles, torsions) for a molecule in gas phase---we have to account for the change of variables and include a Jacobian term, and things can get messy.
@@ -233,31 +240,32 @@ Just remember that if we're writing the density in terms of positions and veloci
 
 The Boltzmann law can actually be derived in a variety of different ways---all of which are too complex to get in here---and is a simple consequence of counting of energy levels or energy densities in systems that can exchange energy with other systems to reach thermal equilibrium.
 The most interesting derivations are found in \emph{Molecular Driving Forces} by Dill and Bromberg, which also show how the \emph{principle of maximum entropy} can be used to derive this surprisingly powerful yet simple law.
-This form of the law---where we're describing a system where the number of particles $N$, volume $V$, and temperature $T$ are held fixed---is said to describe the \emph{canonical ensemble}, and the probability law is referred to as the \emph{canonical distribution} or \emph{canonical density}.
+This form of the law---where we're describing a system where the number of particles $N$, volume $V$, and temperature $T$ are held fixed---is said to describe the \emph{canonical ensemble}, and the probability law is referred to as the \emph{canonical distribution} or \emph{canonical probability density}.
 
-The first thing we notice if we substitute in the expression for the total energy $E(x,v)$ above is that we can factor out the kinetic energy part entirely:
+The first thing we notice if we substitute in the expression for the total energy $E(x,v)$ above (Eq.~\ref{equation:total-energy}) is that we can factor it into potential and kinetic parts:
 \begin{eqnarray}
 \pi(x,v) &\propto& e^{-\beta E(x,v)} \\
 &\propto& e^{-\beta [U(x) + \mathcal{K}(v)]} \\
 &\propto& e^{-\beta U(x)} e^{-\beta \mathcal{K}(v)} \\
 &\propto& \pi_x(x) \cdot \pi_v(v)
 \end{eqnarray}
-Furthermore, we can work out exactly what the kinetic part is without knowing anything other than the atomic masses:
+Furthermore, we can work out exactly what the kinetic energy distribution is without knowing anything other than the atomic masses:
 \begin{eqnarray}
 \pi_v(v) &\propto& e^{-\beta \mathcal{K}(v)} \\
 &\propto& \exp\left[-\frac{1}{2} \sum_{n=1}^N m_n ||v_n||^2 \right]
 \end{eqnarray}
-That means that we can work out a huge number of kinetic equilibrium properties for our protein or small molecule without knowing anything more than the atomic masses.
+That means that we can work out a huge number of kinetic equilibrium properties for our protein or small molecule without knowing anything more than the atomic masses!
 
-Most of the time, however, we're interested in configurational properties, since the kinetic component is so independent of the system and its interactions.
+Most of the time, however, we're interested in configurational properties, since the kinetic component is independent of the system and its interactions.
 To make any progress in configurational properties, we generally need to have a model of the system's interactions so we can write down a potential function $U(x)$ that we can do some computations with.
 
 Let's consider the simplest tractable system with continuous coordinates: {\bf A harmonic oscillator}.
-We can write the potential for a particle confined to a harmonic well---this might be a colloidal bead in a laser trap, or a protein in a crystal:
+This might be a simple model of the motion of a colloidal bead confined to a laser trap, or a protein moving in a crystal at cryocooled temperatures, or the motion of an AFM tip used to probe microscopic matter:
+We can write the potential for a particle confined to a harmonic well:
 \begin{equation}
 U(x) = \frac{K}{2} x^2
 \end{equation}
-where $k$ is the \emph{force constant} or \emph{spring constant} since the force is the negative partial derivative of the potential, and the $k$ constant sits out front:
+where $K$ is the \emph{force constant} or \emph{spring constant} since the force is the negative partial derivative of the potential, and the $K$ constant sits out front:
 \begin{eqnarray}
 F(x) = - \frac{\partial}{\partial x} U(x) = - K \, x
 \end{eqnarray}
@@ -304,7 +312,7 @@ We can also compute properties---such as dependence of the size of fluctuations 
 The width of the distribution, $\sigma$, increases as the square-root of the temperature, and decreases as the square root of the spring constant.
 That means to confine our bead to half the fluctuation size in an optical laser trap, we'd have to quadruple the spring constant, or quadruple the laser power (assuming we're in the linear regime).
 
-While it's hard to analytically solve many problems with continuous configuration spaces beyond this one---we'll need numerical methods and computers to study more complicated systems---we'll work some more problems a bit later using some simple \emph{discrete} systems that are still exactly solvable, and show how this can often be a useful enough model for a biological process that you can get a lot of mileage in understanding potential mechanisms this way.
+While it's hard to analytically solve many problems with continuous configuration spaces beyond this one---we'll need numerical methods and computers to study more complicated systems---we'll work some more problems a bit later using some simple \emph{discrete} systems that are still exactly solvable, and show how this can often be a useful enough model for a biological process that you can get a lot of mileage in understanding common mechanisms this way.
 
 \subsection{Reduced potentials and general equilibrium densities}
 
@@ -323,14 +331,14 @@ Using this general form, we can construct the equilibrium probability density fo
 
 \subsection{Isothermal-isobaric ensemble}
 
-In the simplest case, we may have a system with a fixed number of particles $N$ where the box volume $V$ is allowed in atmospheric pressure $p$.
+In the simplest case, we may have a system with a fixed number of particles $N$ where the box volume $V$ is allowed to fluctuate at atmospheric external pressure $p$.
 
 \begin{centering}
 \includegraphics[width=0.4\textwidth]{figures/npt-system.jpg}
 
 \end{centering}
 
-In this case, we simply include the inverse temperature $\beta$, the potential $U(x)$, the pressure $p$, and the volume $V(x)$:
+In this case, we form the reduced potential by including any terms where one of components of the term is allowed to fluctuate: This includes the inverse temperature $\beta$ (where the potential $U(x)$ will fluctate) and the pressure $p$ (where the volume $V(x)$ is allowed to fluctuate):
 \begin{eqnarray}
 u(x) = \beta \left[ U(x) + p V(x) \right]
 \end{eqnarray}
@@ -338,28 +346,29 @@ u(x) = \beta \left[ U(x) + p V(x) \right]
 \subsection{Ideal gas}
 
 There's a simple illustrative case we can analytically solve: The ideal gas.
-In this case, the potential energy $U(x)$ is always zero, 
+In this case, the potential energy $U(x)$ is always zero, so we can eliminate the term that it appears in:
 \begin{eqnarray}
 u(x) = \beta p V(x)
 \end{eqnarray}
-and we are left with a probability density we can analytically treat. 
-Suppose we have $N$ particles:
+We are left with a probability density that can tell us everything about the system behaves~
+ 
+Suppose we have $N$ particles in our ideal gas:
 \begin{eqnarray}
 \pi(x) \propto e^{-\beta p V(x)}
 \end{eqnarray}
-we can make a transformation of variables and integrate out all the configurations that have a volume $V'$:
+we can make a transformation of variables and carefully integrate over all the configurations $x$ where the volume $V(x)$ is equal to a desired volume $v$:
 \begin{eqnarray}
-\pi(v) &\propto& \int dx e^{-\beta p V(x)} \, \delta(V(x) - v) \\
+\pi(v) &\propto& \int dx \, e^{-\beta p V(x)} \, \delta(V(x) - v) \\
 &\propto& v^N e^{-\beta p v}
 \end{eqnarray}
-where the $V^N$ factor is the Jacobian we pick up when transforming from the 3N-dimensional $x$ to box volume $v$.
+where the $v^N$ factor is the Jacobian we pick up when transforming from the 3N-dimensional $x$ to box volume $v$.
 
 From this, we can compute the average volume of the ideal gas as a function of pressure and temperature!
 \begin{eqnarray}
-\left< v \right>_{\beta, p, N} = \int_0^\infty dv \, v \, \pi(v) = \frac{\int_0^\infty dv \, v \, v^N e^{-\beta p v}}{\int_0^\infty dv \, v^N e^{-\beta p v}} = \frac{N}{\beta p}
+\left< v \right>_{\beta, p, N} = \int_0^\infty dv \, v \, \pi(v) = \frac{\int_0^\infty dv \, v \, v^N e^{-\beta p v}}{\int_0^\infty dv \, v^N e^{-\beta p v}} = \frac{N}{\beta p} = \frac{N k_B T}{p}
 \end{eqnarray}
 The $\left< A \right>_{\beta, p, N}$ brackets mean the {\bf expectation} or average value of a {\bf mechanical observable} $A(x)$ with respect to the thermodynamic parameters in the lower-right corner---in this case, $\{\beta, p, N\}$.
-If we took many measurements of an ideal gas under these fixed thermodynamic conditions, we would see that the individual systems would have an array of different volumes---whose probability is described by $\pi(v)$---but the average would be $N / (\beta p)$.
+If we took many measurements of an ideal gas under these fixed thermodynamic conditions, we would see that the individual systems would have an array of different volumes---whose probability is described by $\pi(v)$---but the average would be $N k_B T / p$.
 
 \subsection{Optical trap}
 
@@ -438,12 +447,14 @@ Surprisingly, these partition coefficients can also be computed from the ratio o
 
 The concept of a {\bf distribution coefficient} ($D$, often appearing as $\log_{10} D$) is related to the partition coefficient, and simply means that instead of using only the neutral form of the solute, we sum up the total concentration of all ionization states in each phase~\cite{rustenburg2016measuring}.
 
+\vfill
+
 \section{Free energy, enthalpy, and entropy}
 
 Partition functions are directly related to free energies.
 In fact, we \emph{define} the {\bf free energy} of a system in terms of partition functions:
 \begin{eqnarray}
-F(\beta, \ldots) \equiv - \beta^{-1} \ln Z(\beta, \ldots) = - \beta^{-1} \int dx \, 
+F(\beta, \ldots) \equiv - \beta^{-1} \ln Z(\beta, \ldots) = - k_B T \ln \int dx \, e^{-\beta U(x)}
 \end{eqnarray}
 Defined in this manner, the free energy has dimensions of energy, and can only be compared at the same temperature $T$ because of the $\beta^{-1} \equiv (k_B T)^{-1}$ that appears in front of $\ln Z$.
 
@@ -451,24 +462,25 @@ More generally, we can define a dimensionless free energy $f(\theta)$ we can use
 \begin{eqnarray}
 f(\theta) \equiv - \ln Z(\theta)
 \end{eqnarray}
-We can convert back to dimensional quantities by just multiplying by $k_B T$ to add back in units of energy: $F(\theta) = k_B T f(\theta)$.
+We can convert back to dimensional quantities by just multiplying by $k_B T$ to add back in units of energy: $F(\theta) = k_B T \, f(\theta)$.
 
-The {\bf enthalpy} of the system is the \emph{average energy} at a given thermodynamic state $\theta$ (again written as dimension:
+The {\bf enthalpy} of the system is the \emph{average energy} at a given thermodynamic state $\theta$ (again written as a dimensionless quantity):
 \begin{eqnarray}
 h(\theta) \equiv \left< u \right>_\theta = \int dx \, u(x) \, e^{-u(x; \theta)}
 \end{eqnarray}
-We can again convert back to dimensional quantities by multiplying by $k_B T$ to get the enthalpy with units of energy: $H(\theta) = k_B T h(\theta)$.
+We can again convert back to dimensional quantities by multiplying by $k_B T$ to get the enthalpy with units of energy: $H(\theta) = k_B T \, h(\theta)$.
 
 The {\bf entropy} of the system can be computed from the relationship
 \begin{eqnarray}
-f(\theta) = h(\theta) - s(\theta) \:\: \Rightarrow s(\theta) = h(\theta) - f(\theta)
+f(\theta) = h(\theta) - s(\theta) \:\: \Rightarrow s(\theta) = h(\theta) - f(\theta) \label{equation:reduced-entropy-relationship}
 \end{eqnarray}
-When written in dimensional form, $S(\theta) = k_B s(\theta)$, since entropy is generally written in dimensions of energy divided by temperature (e.g.\ Joules/Kelvin).
+When written in dimensional form, $S(\theta) = k_B \, s(\theta)$, since entropy is generally written in weird dimensions of energy divided by temperature (e.g.\ Joules/Kelvin) for obscure historical reasons.
 
 \subsection{Simple model of ligand binding}
 
-We can also write the free energy, enthalpy, and entropy for a process (such as ligand binding), or restricted to regions of configuration space (such as the bound states and unbound states of ligand binding). 
-While the free energy is a very useful quantity, the enthalpy and entropy are only modestly useful, even though a great deal of noise has been made about them.
+We can also write the free energy, enthalpy, and entropy \emph{changes} for a process that involves changing the thermodynamic parameters (such as increasing the external pressure on a piston) or restricting parts of the system to specific regions of configuration space (such as a ligand binding a target receptor).
+While the free energy is a very useful quantity, since it tells us directly about the probability of finding the system somewhere (e.g. the fraction of time we will find the ligand bound), the enthalpy and entropy are only modestly useful, even though a great deal of noise has been made about them.
+% Cite ITC paper?
 
 Consider a simple model of ligand binding in which two components have a distance-dependent potential where, if $r < r_0$, there is a favorable binding energy of $-\epsilon$, while for $r \ge r_0$, the interaction energy is zero.
 \begin{eqnarray}
@@ -513,12 +525,33 @@ We can also compute the (dimensionless) free energy difference between the bound
 \lefteqn{\Delta f(\beta, r_0, \epsilon)} \\
 &\equiv& f_\mathrm{bound}(\beta, r_0, \epsilon) - f_\mathrm{unbound}(\beta, r_0, \epsilon) = - \ln Z_\mathrm{bound}(\beta, r_0, \epsilon) + \ln Z_\mathrm{unbound}(\beta, r_0, \epsilon) \\
 &=& - \ln \frac{4}{3}\pi - 3 \ln r_0 - \beta \epsilon + \ln \frac{4}{3}\pi + \ln (r_\mathrm{max}^3 - r_0^3) \\
-&=& - \beta \epsilon + \ln \left[ \left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1 \right]
+&=& - \beta \epsilon + \ln \left[ \left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1 \right] = - \beta \epsilon + \ln c
 \end{eqnarray}
+where we have defined the constant $c = \left[ \left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1 \right]$ since it doesn't depend on any thermodynamic parameters.
+% TODO: Check this section below!
 We can go on to compute the entropy and enthalpy, and see how these behave as a function of $\beta$, $r_0$, and $\epsilon$.
+The enthalpy of the whole system,
 \begin{eqnarray}
-h(\beta, r_0, \epsilon) = \int_0^\infty dr \, 4 \pi r^2 \, u(r) \, \pi(r) = -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon)
+h(\beta, r_0, \epsilon) = \int_0^\infty dr \, 4 \pi r^2 \, u(r) \, \pi(r) = -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon) ,
 \end{eqnarray}
+can be split into separate parts for bound and unbound, and we can compute the enthalpy change upon binding.
+\begin{eqnarray}
+h_\mathrm{bound}(\beta, r_0, \epsilon) &=& \int_0^{r_0} dr \, 4 \pi r^2 \, u(r) \, \pi(r) = -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon)  \\
+h_\mathrm{unbound}(\beta, r_0, \epsilon) &=& \int_{r_0}^\infty dr \, 4 \pi r^2 \, u(r) \, \pi(r) = 0  \\
+\Delta h_\mathrm{bound}(\beta, r_0, \epsilon) &\equiv& h_\mathrm{bound}(\beta, r_0, \epsilon) - h_\mathrm{unbound}(\beta, r_0, \epsilon) \\
+&=& -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon)  \\
+\end{eqnarray}
+Finally, the entropy change can be computed by noting from Eq.~\ref{equation:reduced-entropy-relationship},
+\begin{eqnarray}
+\Delta s &=& \Delta h - \Delta f \\
+&=& -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon) + \beta \epsilon - \ln c \\
+&=& -\frac{\epsilon}{1 + \alpha e^{-\beta \epsilon}} + \beta \epsilon - \ln c
+\end{eqnarray}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\eject
+\lecture[Read prior to lecture]{14}{09}{2019}
 
 \section{The fundamental laws of thermodynamics}
 
@@ -590,7 +623,6 @@ This can have very important consequences for protein conformational landscapes 
 \end{centering}
 
 \section{Observables, expectations, and susceptibilities}
-\lecture[BB302D]{09}{09}{2019}
 
 \subsection{Expectations of observables}
 
