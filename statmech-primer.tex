@@ -518,34 +518,28 @@ The fraction of bound ligand can easily be expressed in terms of these partition
 \begin{eqnarray}
 P_\mathrm{bound}(\beta, r_0, \epsilon) &=& \frac{Z_\mathrm{bound}(\beta, r_0, \epsilon)}{Z_\mathrm{bound}(\beta, r_0, \epsilon) + Z_\mathrm{unbound}(\beta, r_0, \epsilon)} \\
 &=& \frac{\frac{4}{3} \pi r_0^3 e^{\beta \epsilon}}{\frac{4}{3} \pi r_0^3 e^{\beta \epsilon} + \frac{4}{3} \pi (r_\mathrm{max}^3 - r_0^3)} \\
-&=& \frac{1}{1 + \left[\left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1\right] e^{-\beta \epsilon}}
+&=& \frac{e^{\beta \epsilon}}{e^{\beta \epsilon} + \frac{(r_\mathrm{max}^3 - r_0^3)}{r_0^3}} \\
+%&=& \frac{1}{1 + \left[\left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1\right] e^{-\beta \epsilon}}
 \end{eqnarray}
 We can also compute the (dimensionless) free energy difference between the bound and unbound states:
 \begin{eqnarray}
 \lefteqn{\Delta f(\beta, r_0, \epsilon)} \\
 &\equiv& f_\mathrm{bound}(\beta, r_0, \epsilon) - f_\mathrm{unbound}(\beta, r_0, \epsilon) = - \ln Z_\mathrm{bound}(\beta, r_0, \epsilon) + \ln Z_\mathrm{unbound}(\beta, r_0, \epsilon) \\
-&=& - \ln \frac{4}{3}\pi - 3 \ln r_0 - \beta \epsilon + \ln \frac{4}{3}\pi + \ln (r_\mathrm{max}^3 - r_0^3) \\
-&=& - \beta \epsilon + \ln \left[ \left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1 \right] = - \beta \epsilon + \ln c
+&=& - \ln \frac{4}{3}\pi - \ln r_0^3 - \beta \epsilon + \ln \frac{4}{3}\pi + \ln (r_\mathrm{max}^3 - r_0^3) \\
+&=& - \beta \epsilon + \ln \frac{r_\mathrm{max}^3 - r_0^3}{r_0^3}
 \end{eqnarray}
 where we have defined the constant $c = \left[ \left(\frac{r_\mathrm{max}}{r_0}\right)^3 - 1 \right]$ since it doesn't depend on any thermodynamic parameters.
 % TODO: Check this section below!
-We can go on to compute the entropy and enthalpy, and see how these behave as a function of $\beta$, $r_0$, and $\epsilon$.
-The enthalpy of the whole system,
+
+We can go on to compute the entropy and enthalpy changes and see how these behave as a function of $\beta$, $r_0$, and $\epsilon$.
+The enthalpy change on binding is
 \begin{eqnarray}
-h(\beta, r_0, \epsilon) = \int_0^\infty dr \, 4 \pi r^2 \, u(r) \, \pi(r) = -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon) ,
-\end{eqnarray}
-can be split into separate parts for bound and unbound, and we can compute the enthalpy change upon binding.
-\begin{eqnarray}
-h_\mathrm{bound}(\beta, r_0, \epsilon) &=& \int_0^{r_0} dr \, 4 \pi r^2 \, u(r) \, \pi(r) = -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon)  \\
-h_\mathrm{unbound}(\beta, r_0, \epsilon) &=& \int_{r_0}^\infty dr \, 4 \pi r^2 \, u(r) \, \pi(r) = 0  \\
-\Delta h_\mathrm{bound}(\beta, r_0, \epsilon) &\equiv& h_\mathrm{bound}(\beta, r_0, \epsilon) - h_\mathrm{unbound}(\beta, r_0, \epsilon) \\
-&=& -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon)  \\
+\Delta h(\beta, r_0, \epsilon) &=& - \beta \epsilon +  0 = - \beta \epsilon
 \end{eqnarray}
 Finally, the entropy change can be computed by noting from Eq.~\ref{equation:reduced-entropy-relationship},
 \begin{eqnarray}
-\Delta s &=& \Delta h - \Delta f \\
-&=& -\epsilon \cdot P_\mathrm{bound}(\beta, r_0, \epsilon) + \beta \epsilon - \ln c \\
-&=& -\frac{\epsilon}{1 + \alpha e^{-\beta \epsilon}} + \beta \epsilon - \ln c
+\Delta s &=& \Delta h - \Delta f = - \beta \epsilon - \left[ - \beta \epsilon + \ln \frac{r_\mathrm{max}^3 - r_0^3}{r_0^3} \right ] \\
+&=& - \ln \frac{r_\mathrm{max}^3 - r_0^3}{r_0^3}
 \end{eqnarray}
 
 
